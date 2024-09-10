@@ -1,8 +1,8 @@
-# AzureTts
+# AzureTTS
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/azure_tts`. To experiment with that code, run `bin/console` for an interactive prompt.
+AzureTTS is a Ruby gem that provides an interface to Microsoft Azure's Text-to-Speech service. It allows you
+to convert text to speech and save it as an audio file or integrate it with Rails' Active Storage.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -22,7 +22,35 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+Use the AzureTTS::Client to generate a speech file:
+```
+# config/initializers/azure_tts.rb
+AzureTTS.configure do |config|
+  config.region = "your_azure_region"
+  config.api_key = "your_azure_api_key"
+end
+```
+
+```
+client = AzureTTS::Client.new
+client.speak_file("Hello, world!", "output.wav", {gender: :female, name: 'en-US-JennyNeural', language: 'en-US'})
+```
+
+
+Setup Active Storage in the Model
+
+```
+class MyModel < ApplicationRecord
+  has_one_attached :audio_file
+end
+```
+
+```
+my_model = MyModel.new
+client.speak_to_active_storage("Hello, world!", my_model.audio_file, {gender: :female, name: 'en-US-JennyNeural', language: 'en-US'})
+my_model.save
+```
 
 ## Development
 
@@ -32,8 +60,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/azure_tts.
+Bug reports and pull requests are welcome on GitHub at https://github.com/graysonchen/azure_tts.
 
+## Reference
+
+- https://github.com/csmpfo/Ruby-Lib-for-Microsoft-Azure-Text-2-Speech/tree/master
+- https://github.com/adhearsion/ruby_speech
+- https://github.com/cristianbica/azure-tts
 
 ## License
 
