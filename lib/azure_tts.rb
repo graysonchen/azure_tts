@@ -52,7 +52,7 @@ module AzureTTS
       temp_file.rewind
 
       attachment.attach(
-        io: temp_file,
+        io: File.open(temp_file.path),
         filename: "tts_output_#{Time.now.to_i}.wav",
         content_type: 'audio/wav'
       )
