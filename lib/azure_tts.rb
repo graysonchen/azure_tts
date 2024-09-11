@@ -96,7 +96,7 @@ module AzureTTS
       end
 
       resp = http.post(url.path, data.to_s, headers)
-      raise Error, "TTS request failed: #{resp.body}" unless resp.is_a?(Net::HTTPSuccess)
+      raise Error, "TTS request failed: #{resp.code} - #{resp.body}" unless resp.is_a?(Net::HTTPSuccess)
 
       resp.body
     end
