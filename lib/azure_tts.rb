@@ -57,8 +57,8 @@ module AzureTTS
         content_type: 'audio/wav'
       )
     ensure
-      temp_file.close
-      temp_file.unlink
+      temp_file&.close
+      temp_file&.unlink
     end
 
     private
