@@ -49,7 +49,6 @@ end
 ```
 my_model = MyModel.new
 client.speak_to_active_storage("Hello, world!", my_model.audio_file, {gender: :female, name: 'en-US-JennyNeural', language: 'en-US'})
-my_model.save
 ```
 
 ## Development
